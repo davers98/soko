@@ -11,13 +11,5 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-//    public function product(){
-//        return view('home.admin');
-//    }
-//
-//    public function addProduct()
-//    {
-//
-//        return redirect('dashboard');
-//    }
+
 }
