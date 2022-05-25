@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +16,20 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('home', function () {
-    return view('home.home');
+Route::get('/', function () {
+    return view('auth.login');
 });
 
 
 
    // Route::get('/', HomeController::)
+Route::get('home', function(){
+   return view('home.home');
+});
+
+Route::get('dashboard', function () {
+    return view('home.admin');
+});
 
     //Route::group(['middleware'=> ['guest'] ])
     Route::get('register',[AuthController::class, 'register'])->name('register');
@@ -30,6 +39,10 @@ Route::get('home', function () {
     Route::post('login',[AuthController::class, 'storeLogin'])->name('login.storeLogin');
 
     Route::get('logout',[AuthController::class, 'logout'])->name('logout');
+
+
+    Route::post('product',[ProductController::class, 'addProduct'])->name('product.addProduct');
+    Route::get('product', [ProductController::class, 'product'])->name('product');
 
 
 
