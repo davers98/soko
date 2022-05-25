@@ -247,10 +247,15 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'products',
+            'text'        => 'Products',
             'url'         => 'dashboard/products',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Categories',
+            'url'         => 'dashboard/categories',
+            'icon'        => 'far fa-fw fa-items',
             'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
