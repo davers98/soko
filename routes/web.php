@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ProductCategories;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -41,8 +41,11 @@ Route::get('dashboard', function () {
     Route::get('logout',[AuthController::class, 'logout'])->name('logout');
 
 
-    Route::post('product',[ProductController::class, 'addProduct'])->name('product.addProduct');
-    Route::get('product', [ProductController::class, 'product'])->name('product');
+    Route::post('dashboard/products',[ProductController::class, 'addProduct'])->name('product.addProduct');
+    Route::get('dashboard/products', [ProductController::class, 'product'])->name('product');
+
+    Route::get('dashboard/categories', [ProductCategories::class, 'category'])->name('categories');
+    Route::post('dashboard/categories', [ProductCategories::class, 'store'])->name('categories.store');
 
 
 
