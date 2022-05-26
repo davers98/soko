@@ -10,7 +10,8 @@ class ProductCategories extends Controller
     //
 
     public function category(){
-        return view('home.category');
+        $items = Category::all();
+        return view('home.category',compact('items'));
 
     }
 

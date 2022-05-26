@@ -81,71 +81,57 @@
 
 
     {{-- Example button to open modal --}}
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productmodal">
-        Add Category
-    </button>
-    @php
-        $heads = [
-        'ID',
-        'Name',
-        ['label' => 'Phone','width'=> 40],
-        ['label' => 'Actions', 'no-export'=>false, 'width'=>5 ],
 
-        ];
-        $btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-            <i class="fa fa-lg fa-fw fa-pen"></i>
-        </button>';
-        $btnDelete = '<button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
-                      <i class="fa fa-lg fa-fw fa-trash"></i>
-                  </button>';
-        $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
-                       <i class="fa fa-lg fa-fw fa-eye"></i>
-                   </button>';
 
-        $config = [
-        'data' => [
-            [22, 'John Bender', '+02 (123) 123456789', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
-            [19, 'Sophia Clemens', '+99 (987) 987654321', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
-            [3, 'Peter Sousa', '+69 (555) 12367345243', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
-        ],
-        'order' => [[1, 'asc']],
-        'columns' => [null, null, null, ['orderable' => false]],
-
-    ];
-
-    @endphp
 
 
     {{-- Minimal example / fill data using the component slot --}}
 
-    <x-adminlte-datatable id="table7" :heads="$heads" head-theme="light" :config="$config" striped hoverable with buttons>
-        @foreach($config['data'] as $row)
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th colspan="2">Search</th>
+            <th colspan="2">Edit</th>
+            <th scope="col">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productmodal">
+                    Add Category
+                </button>
+            </th>
+        </tr>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Desciption</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($items as $item)
             <tr>
-                @foreach($row as $cell)
-                    <td>{!! $cell !!}</td>
-                @endforeach
+                <td scope="row">{{ $item->id }}</td>
+                <td>{{ $item->category }}</td>
+                <td>{{ $item->catdescription }}</td>
+                <td>{{ $item->swacategory }}</td>
+                <td>{{ $item->swacatdescription }}</td>
+                <td>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </td>
             </tr>
         @endforeach
-    </x-adminlte-datatable>
+        </tbody>
+    </table>
 
 
 
 @stop
-
-{{-- Compressed with style options / fill data using the plugin config --}}
-{{--    <x-adminlte-datatable id="table2" :heads="$heads" head-theme="dark" :config="$config"--}}
-{{--                          striped hoverable bordered compressed/>--}}
-
-
-
-
 
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
 
-{{--@section('plugins.Datatables', true)--}}
+@stop
 
 
 @section('js')

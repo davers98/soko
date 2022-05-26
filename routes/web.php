@@ -48,5 +48,9 @@ Route::get('dashboard', function () {
     Route::post('dashboard/categories', [ProductCategories::class, 'store'])->name('categories.store');
 
 
+    Route::get('dashboard/products/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('dashboard/products/{id}',[ProductController::class, 'update'])->name('product.update');
+
+
 
 
