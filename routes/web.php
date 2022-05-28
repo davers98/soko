@@ -28,6 +28,7 @@ Route::get('home', function(){
 });
 
 Route::get('dashboard', function () {
+
     return view('home.admin');
 });
 
@@ -49,7 +50,7 @@ Route::get('dashboard', function () {
 
 
     Route::get('dashboard/products/{id}', [ProductController::class, 'edit'])->name('product.edit');
-    Route::post('dashboard/products/{id}',[ProductController::class, 'update'])->name('product.update');
+    Route::post('dashboard/productsUpdate/{id}',[ProductController::class, 'update'])->name('product.update.{id}');
 
 
 
