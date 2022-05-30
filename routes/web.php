@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductCategories;
 use App\Http\Controllers\ProductController;
+use App\Models\Products;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +30,10 @@ Route::get('home', function(){
 });
 
 Route::get('dashboard', function () {
-
-    return view('home.admin');
+        $url[] = 'dashboard/products/edit/{id}';
+        $items = Category::all(['id','category']);
+        $products = Products::all();
+    return view('home.admin',compact('items','products'));
 });
 
     //Route::group(['middleware'=> ['guest'] ])
@@ -49,8 +53,15 @@ Route::get('dashboard', function () {
     Route::post('dashboard/categories', [ProductCategories::class, 'store'])->name('categories.store');
 
 
-    Route::get('dashboard/products/{id}', [ProductController::class, 'edit'])->name('product.edit');
-    Route::post('dashboard/productsUpdate/{id}',[ProductController::class, 'update'])->name('product.update.{id}');
+    Route::get('dashboard/products/edit/{id}', [ProductController::class, 'edit']);
+    Route::put('dashboard/products/update/{id}',[ProductController::class, 'update']);
+
+
+    Route::delete('dashboard/products/delete/{id}', [ProductController::class, 'destroy']);
+    Route::delete('dashboard/category/delete/{id}', [ProductCategories::class, 'destroy']);
+
+    Route::get('dashboard/categories/edit/{id}', [ProductCategories::class, 'edit']);
+    Route::put('dashboard/categories/update/{id}',[ProductCategories::class, 'update']);
 
 
 

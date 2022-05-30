@@ -12,17 +12,18 @@ class ProductController extends Controller
     public function product(){
         $items = Category::all(["id","category"]);
         $products = Products::all();
-        return view('home.admin', compact('items','products'));
+        return view('home.product', compact('items','products'));
     }
 
     public function edit($id){
-        $product = Products::find($id);
-        return view('home.edit',compact('product'));
+        $products = Products::findOrFail($id);
+        $items = Category::all();
+        return view('home.edit',compact('products','items'));
     }
 
     public function update(Request $request, $id)
     {
-        $products = Products::find($id);
+        $products = Products::findOrFail($id);
 
         $products->productname = $request->input('productname');
         $products->description = $request->input('description');
@@ -35,7 +36,7 @@ class ProductController extends Controller
             $products['image'] = $fileName;
         }
         $products->update();
-        return redirect('dashboard');
+        return redirect('dashboard/product');
 
     }
 
@@ -54,6 +55,16 @@ class ProductController extends Controller
             $product['image'] = $fileName;
         }
         $product->save();
-        return redirect('dashboard');
+        return redirect('dashboard/product');
+    }
+
+    public function destroy(Request $request, $id){
+
+        $products = Products::findOrFail($id);
+
+        $products->id =$request->input('id');
+        $products->delete();
+
+        return redirect('dashboard/product');
     }
 }
