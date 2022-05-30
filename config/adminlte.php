@@ -46,11 +46,11 @@ return [
     */
 
     'logo' => '<b>Soko</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => '',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -245,6 +245,18 @@ return [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
+        ],
+        [
+            'text'        => 'Dashboard',
+            'url'         => 'dashboard',
+            'icon'        => 'far fa-fw fa-home',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Businesses',
+            'url'         => 'dashboard/businesses',
+            'icon'        => 'far fa-fw fa-shop',
+            'label_color' => 'success',
         ],
         [
             'text'        => 'Products',
