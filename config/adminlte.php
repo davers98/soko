@@ -253,6 +253,12 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text'        => 'Users',
+            'url'         => 'dashboard/users',
+            'icon'        => 'far fa-fw fa-user',
+            'label_color' => 'success',
+        ],
+        [
             'text'        => 'Businesses',
             'url'         => 'dashboard/businesses',
             'icon'        => 'far fa-fw fa-shop',

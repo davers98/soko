@@ -6,6 +6,8 @@
     <h1>Dashboard</h1>
 
 
+
+
 @stop
 
 
@@ -15,7 +17,15 @@
 
 @section('content')
 
-
+    <div class="card" style="width: 10rem;">
+        <div class="card-body">
+            <h3 class="card-title" style="align-items: center">Products</h3><br>
+            <h1>{{ $count }}</h1>
+{{--            <h1 class="card-subtitle mb-2 text-muted">50</h1>--}}
+            <p class="card-text">
+            </p>
+        </div>
+    </div>
 
 @stop
 
@@ -36,6 +46,8 @@
             padding: inherit;
 
         }
+
+
     </style>
 
 

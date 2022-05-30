@@ -33,7 +33,8 @@ Route::get('dashboard', function () {
         $url[] = 'dashboard/products/edit/{id}';
         $items = Category::all(['id','category']);
         $products = Products::all();
-    return view('home.admin',compact('items','products'));
+        $count = Products::count();
+    return view('home.admin',compact('items','products', 'count'));
 });
 
     //Route::group(['middleware'=> ['guest'] ])
