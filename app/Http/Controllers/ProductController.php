@@ -11,7 +11,7 @@ class ProductController extends Controller
 
     public function product(){
         $items = Category::all(["id","category"]);
-        $products = Products::all();
+        $products = Products::paginate(5);
         return view('home.product', compact('items','products'));
     }
 
@@ -36,7 +36,7 @@ class ProductController extends Controller
             $products['image'] = $fileName;
         }
         $products->update();
-        return redirect('dashboard/product');
+        return redirect('dashboard/products');
 
     }
 
@@ -55,7 +55,7 @@ class ProductController extends Controller
             $product['image'] = $fileName;
         }
         $product->save();
-        return redirect('dashboard/product');
+        return redirect('dashboard/products');
     }
 
     public function destroy(Request $request, $id){
@@ -65,6 +65,6 @@ class ProductController extends Controller
         $products->id =$request->input('id');
         $products->delete();
 
-        return redirect('dashboard/product');
+        return redirect('dashboard/products');
     }
 }

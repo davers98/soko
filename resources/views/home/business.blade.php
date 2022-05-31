@@ -20,37 +20,27 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add product</h5>
+                    <h5 class="modal-title">Add Business</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ route('product.addProduct') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('business.add') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col">
-                                <label for="productname">Product Name</label>
+                                <label for="productname">Business Name</label>
                                 <input type="text" class="form-control" id="productname" name="productname" placeholder="Product Name">
 
                             </div>
-                            <div class="col">
-                                <label class="mr-sm-2" for="category">Category</label>
-                                <select class="custom-select mr-sm-2" id="category" name="category">
-                                    <option selected>Choose...</option>
-                                    @foreach($items as $item)
-                                        <option value="{{ $item->id }}">{{ $item->category }}</option>
-                                    @endforeach
 
-                                </select>
-
-                            </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <label for="description">Description</label>
-                                <textarea type="text" class="form-control" name="description" placeholder="Description"></textarea>
+                                <label for="email">User Email</label>
+                                <input type="text" class="form-control" name="email" placeholder="User Email"/>
 
                             </div>
 
@@ -59,21 +49,21 @@
                         <div class="row">
                             <div class="col">
                                 <div class="col">
-                                    <label for="price">Price</label>
-                                    <input type="number" class="form-control" id="price" name="price" placeholder="Price">
+                                    <label for="businesstype">Business Type</label>
+                                    <input type="text" class="form-control" id="businesstype" name="businesstype" placeholder="Business Type">
                                 </div>
                             </div>
                             <div class="col-4">
-                                <label for="units">Units</label>
-                                <input type="number" class="form-control" id="units" name="units" placeholder="Units">
+                                <label for="location">Location</label>
+                                <input type="text" class="form-control" id="location" name="location" placeholder="location">
                             </div>
 
 
                         </div>
                         <div class="row">
                             <div class="col">
-                                <label for="image">Images</label>
-                                <input type="file" class="form-control" id="image" name="image" placeholder="Image" multiple>
+                                <label for="overview">Business Overview</label>
+                                <textarea type="file" class="form-control" id="overview" name="overview" placeholder="Business Overview" multiple/>
                             </div>
                         </div>
 

@@ -253,15 +253,15 @@ return [
             'label_color' => 'success',
         ],
         [
-            'text'        => 'Users',
-            'url'         => 'dashboard/users',
-            'icon'        => 'far fa-fw fa-user',
-            'label_color' => 'success',
-        ],
-        [
             'text'        => 'Businesses',
             'url'         => 'dashboard/businesses',
             'icon'        => 'far fa-fw fa-shop',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Users',
+            'url'         => 'dashboard/users',
+            'icon'        => 'far fa-fw fa-user',
             'label_color' => 'success',
         ],
         [
@@ -270,12 +270,7 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ],
-        [
-            'text'        => 'Categories',
-            'url'         => 'dashboard/categories',
-            'icon'        => 'far fa-fw fa-items',
-            'label_color' => 'success',
-        ],
+
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -288,12 +283,14 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text'    => 'multilevel',
+            'text'    => 'System Settings',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text'        => 'Categories',
+                    'url'         => 'dashboard/categories',
+                    'icon'        => 'far fa-fw fa-items',
+                    'label_color' => 'success',
                 ],
                 [
                     'text'    => 'level_one',
