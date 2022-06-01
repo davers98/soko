@@ -6,6 +6,8 @@
     <h1>Dashboard</h1>
 
 
+
+
 @stop
 
 
@@ -15,7 +17,17 @@
 
 @section('content')
 
+    <div class="card" style="width: 10rem;">
+        <a href="{{ url('dashboard/products') }}">
+        <div class="card-body">
+            <h3 class="card-title" style="align-items: center">Products</h3><br>
+            <h1>{{ $count }}</h1>
 
+            <p class="card-text">
+            </p>
+        </div>
+        </a>
+    </div>
 
 @stop
 
@@ -36,6 +48,8 @@
             padding: inherit;
 
         }
+
+
     </style>
 
 

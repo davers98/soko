@@ -8,11 +8,6 @@
 
 @stop
 
-
-
-
-
-
 @section('content')
 
     {{--        //add product modal--}}
@@ -68,7 +63,6 @@
                                 <input type="number" class="form-control" id="units" name="units" placeholder="Units">
                             </div>
 
-
                         </div>
                         <div class="row">
                             <div class="col">
@@ -76,8 +70,6 @@
                                 <input type="file" class="form-control" id="image" name="image" placeholder="Image" multiple>
                             </div>
                         </div>
-
-
 
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -88,11 +80,6 @@
             </div>
         </div>
     </div>
-
-
-    {{--Edit Product Modal--}}
-
-
 
     <div class="container">
         <table class="table table-bordered table-responsive-md" class="table1">
@@ -122,7 +109,8 @@
             </thead>
 
                 <tbody>
-                @foreach($products as $product)
+                @if(!empty($products) && $products->count())
+                @foreach($products as $key => $product)
                 <tr>
                     <td scope="row">{{ $product->id }}</td>
                     <td><a href="{{ url('dashboard/products/edit/'.$product->id) }}">{{ $product->productname }}</a></td>
@@ -221,10 +209,15 @@
                     </td>
                 </tr>
                 @endforeach
+                    @else
+                <tr>
+                    <td colspan="10">There are no data.</td>
+                </tr>
+                    @endif
                 </tbody>
-
         </table>
     </div>
+    {!! $products->appends(['sort'=>'price'])->links() !!}
 
 @stop
 

@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductCategories;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use App\Models\Products;
 use App\Models\Category;
+use App\Models\User;
+use App\Http\Controllers\BusinessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +36,14 @@ Route::get('dashboard', function () {
         $url[] = 'dashboard/products/edit/{id}';
         $items = Category::all(['id','category']);
         $products = Products::all();
-    return view('home.admin',compact('items','products'));
+        $count = Products::count();
+    return view('home.admin',compact('items','products', 'count'));
 });
 
     //Route::group(['middleware'=> ['guest'] ])
     Route::get('register',[AuthController::class, 'register'])->name('register');
     Route::post('register',[AuthController::class, 'storeRegister'])->name('register.storeRegister');
+    Route::put('dashboard/users/update/{id}', [AuthController::class, 'update']);
 
     Route::get('login',[AuthController::class, 'login'])->name('login');
     Route::post('login',[AuthController::class, 'storeLogin'])->name('login.storeLogin');
@@ -62,6 +67,15 @@ Route::get('dashboard', function () {
 
     Route::get('dashboard/categories/edit/{id}', [ProductCategories::class, 'edit']);
     Route::put('dashboard/categories/update/{id}',[ProductCategories::class, 'update']);
+
+    Route::get('dashboard/users', [UserController::class, 'index'])->name('users');
+
+    Route::get('dashboard/business', [BusinessController::class, 'index'])->name('business');
+    Route::post('dashboard/business', [BusinessController::class, 'add'])->name('business.add');
+
+
+
+
 
 
 
