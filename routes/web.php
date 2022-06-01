@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Models\Products;
 use App\Models\Category;
 use App\Models\User;
+use App\Http\Controllers\BusinessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,11 @@ Route::get('dashboard', function () {
     Route::put('dashboard/categories/update/{id}',[ProductCategories::class, 'update']);
 
     Route::get('dashboard/users', [UserController::class, 'index'])->name('users');
+
+    Route::get('dashboard/business', [BusinessController::class, 'index'])->name('business');
+    Route::post('dashboard/business', [BusinessController::class, 'add'])->name('business.add');
+
+
 
 
 

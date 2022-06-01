@@ -22,6 +22,9 @@ return new class extends Migration
                 ->references('email')
                 ->on('users')
                 ->onUpdate('cascade');
+            $table->string('businesstype');
+            $table->string('location');
+            $table->string('overview');
             $table->timestamps();
         });
     }
