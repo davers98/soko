@@ -132,7 +132,7 @@
 
 
 
-                                            <form method="post" action="{{ url('dashboard/products/update'.$business->id) }}" enctype="multipart/form-data">
+                                            <form method="post" action="{{ url('dashboard/businesses/update/'.$business->id) }}" enctype="multipart/form-data">
 
                                                 @csrf
                                                 @method('PUT')
@@ -143,8 +143,8 @@
 
                                                     </div>
                                                     <div class="col">
-                                                        <label class="mr-sm-2" for="inlineFormCustomSelect">User Email</label>
-                                                        <select class="custom-select mr-sm-2" id="user" name="suer">
+                                                        <label class="mr-sm-2" for="user">User Email</label>
+                                                        <select class="custom-select mr-sm-2" id="user" name="user">
                                                             <option selected  value="{{ $business->user }}"></option>
                                                             @foreach($users as $user)
                                                                 <option value="{{ $user->email }}">{{ $user->email }}</option>
@@ -161,7 +161,19 @@
                                                         <input type="text" class="form-control" name="businesstype" id="businesstype"  value="{{ $business->businesstype }}" placeholder="Business Type"/>
 
                                                     </div>
+                                                    <div class="col">
+                                                        <label for="location">Location</label>
+                                                        <input type="text" class="form-control" name="location" id="location"  value="{{ $business->location }}" placeholder="Business Type"/>
 
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                    <label for="overview">Business Overview</label>
+                                                    <input type="text" class="form-control" name="overview" id="overview"  value="{{ $business->overview }}" placeholder="Business Type"/>
+
+                                                </div>
                                                 </div>
 
 
