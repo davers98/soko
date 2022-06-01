@@ -13,6 +13,8 @@ class Business extends Model
     protected $fillable = [
         'name',
         'user',
-        ''
+        'businesstype',
+        'location',
+        'overview'
         ];
 }

@@ -8,11 +8,6 @@
 
 @stop
 
-
-
-
-
-
 @section('content')
 
     {{--        //add product modal--}}
@@ -20,7 +15,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Business</h5>
+                    <h5 class="modal-title">Add product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -30,59 +25,59 @@
                         @csrf
                         <div class="row">
                             <div class="col">
-                                <label for="productname">Business Name</label>
-                                <input type="text" class="form-control" id="productname" name="productname" placeholder="Product Name">
+                                <label for="name">Business Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Product Name">
 
                             </div>
+                            <div class="col">
+                                <label class="mr-sm-2" for="user">Email</label>
+                                <select class="custom-select mr-sm-2" id="user" name="user">
+                                    <option selected>Choose...</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->email }}">{{ $user->email }}</option>
+                                    @endforeach
 
+                                </select>
+
+                            </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <label for="email">User Email</label>
-                                <input type="text" class="form-control" name="email" placeholder="User Email"/>
-
+                                <label for="businesstype">Business Type</label>
+                                <input type="text" class="form-control" id="businesstype" name="businesstype" placeholder="Business Type">
                             </div>
+
 
                         </div>
 
                         <div class="row">
-                            <div class="col">
                                 <div class="col">
-                                    <label for="businesstype">Business Type</label>
-                                    <input type="text" class="form-control" id="businesstype" name="businesstype" placeholder="Business Type">
+                                    <label for="overview">Business Overview</label>
+                                    <textarea type="text" class="form-control" name="overview" placeholder="Overview"></textarea>
+
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <label for="location">Location</label>
-                                <input type="text" class="form-control" id="location" name="location" placeholder="location">
-                            </div>
 
-
-                        </div>
-                        <div class="row">
+                            </div>
                             <div class="col">
-                                <label for="overview">Business Overview</label>
-                                <textarea type="file" class="form-control" id="overview" name="overview" placeholder="Business Overview" multiple/>
+                                <label for="location">Location</label>
+                                <input type="text" class="form-control" id="location" name="location" placeholder="Location">
                             </div>
-                        </div>
 
 
+                        <div class="row">
 
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
+                        </div>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
-
-
-    {{--Edit Product Modal--}}
-
-
 
     <div class="container">
         <table class="table table-bordered table-responsive-md" class="table1">
@@ -94,8 +89,8 @@
 
                 </th>
                 <th scope="col">
-                    <button type="button" class="btn btn-primary" href="{{ route('product') }}" data-toggle="modal" data-target="#productmodal">
-                        Add Products
+                    <button type="button" class="btn btn-primary" href="{{ route('business') }}" data-toggle="modal" data-target="#productmodal">
+                        Add Business
                     </button>
                 </th>
 
@@ -103,118 +98,106 @@
 
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Desciption</th>
-                <th scope="col">Category</th>
-                <th scope="col">Price</th>
+                <th scope="col">Business Name</th>
+                <th scope="col">Business Type</th>
+                <th scope="col">Location</th>
+                <th scope="col">Date Added</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
 
             <tbody>
-            @foreach($products as $product)
-                <tr>
-                    <td scope="row">{{ $product->id }}</td>
-                    <td><a href="{{ url('dashboard/products/edit/'.$product->id) }}">{{ $product->productname }}</a></td>
-                    <td>{{ $product->description }}</td>
-                    <td>{{ $product->category }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td >
-                        <button class="btn btn-primary"  data-toggle="modal" data-target="#editModal-{{ $product->id }}" > Edit </button>
+            @if(!empty($businesses) && $businesses->count())
+                @foreach($businesses as $key => $business)
+                    <tr>
+                        <td scope="row">{{ $business->id }}</td>
+                        <td><a href="{{ url('dashboard/business/edit/'.$business->id) }}">{{ $business->name }}<br>
+                        {{ $business->user }}</a></td>
+                        <td>{{ $business->businesstype }}</td>
+                        <td>{{ $business->location }}</td>
+                        <td>{{ $business->created_at }}</td>
+                        <td >
+                            <button class="btn btn-primary"  data-toggle="modal" data-target="#editModal-{{ $business->id }}" > Edit </button>
 
-                        <div class="modal" id="editModal-{{ $product->id }}" tabindex="-1" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Edit product</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
+                            <div class="modal" id="editModal-{{ $business->id }}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Business</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
 
 
 
-                                        <form method="post" action="{{ url('dashboard/products/update'.$product->id) }}" enctype="multipart/form-data">
+                                            <form method="post" action="{{ url('dashboard/products/update'.$business->id) }}" enctype="multipart/form-data">
 
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label for="productname">Product Name</label>
-                                                    <input type="text" class="form-control" id="productname" value="{{ $product->productname }}" name="productname" placeholder="Product Name">
-
-                                                </div>
-                                                <div class="col">
-                                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Category</label>
-                                                    <select class="custom-select mr-sm-2" id="category" name="category">
-                                                        <option selected  value="{{ $product->category }}"></option>
-                                                        @foreach($items as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->category }}</option>
-                                                        @endforeach
-
-                                                    </select>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label for="description">Description</label>
-                                                    <textarea type="text" class="form-control" name="description" id="description"  value="{{ $product->description }}" placeholder="Description"></textarea>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="row">
                                                     <div class="col">
-                                                        <label for="price">Price</label>
-                                                        <input type="number" class="form-control" id="price" value="{{ $product->price }}" name="price" placeholder="Price">
+                                                        <label for="name">Business Name</label>
+                                                        <input type="text" class="form-control" id="name" value="{{ $business->name }}" name="name" placeholder="Product Name">
+
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="mr-sm-2" for="inlineFormCustomSelect">User Email</label>
+                                                        <select class="custom-select mr-sm-2" id="user" name="suer">
+                                                            <option selected  value="{{ $business->user }}"></option>
+                                                            @foreach($users as $user)
+                                                                <option value="{{ $user->email }}">{{ $user->email }}</option>
+                                                            @endforeach
+
+                                                        </select>
+
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
-                                                    <label for="units">Units</label>
-                                                    <input type="number" class="form-control" id="units" value="{{ $product->units }}" name="units" placeholder="Units">
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="businesstype">Business Type</label>
+                                                        <input type="text" class="form-control" name="businesstype" id="businesstype"  value="{{ $business->businesstype }}" placeholder="Business Type"/>
+
+                                                    </div>
+
                                                 </div>
 
 
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label for="image">Images</label>
-                                                    <input type="file" class="form-control" id="image" name="image" placeholder="Image" multiple>
+
+
+
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 </div>
-                                            </div>
-
-
-
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </form>
+                                            </form>
 
 
 
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" href="{{ url('dashboard/products/delete/'. $product->id ) }}"> Delete </button>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" href="{{ url('dashboard/products/delete/'. $business->id ) }}"> Delete </button>
 
-                    </td>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="10">There are no data.</td>
                 </tr>
-            @endforeach
+            @endif
             </tbody>
-
         </table>
     </div>
+{{--    {!! $businesses->links() !!}--}}
 
 @stop
 

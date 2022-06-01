@@ -100,7 +100,7 @@
                 <td>
                     <a href="{{ url('dashboard/categories/edit/'. $user->id) }}">
                         {{ $user->name }}<br>
-                        {{ $user->email }}
+                        <span> {{ $user->email }}</span>
                     </a>
                 </td>
                 <td>

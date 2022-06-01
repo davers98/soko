@@ -70,8 +70,9 @@ Route::get('dashboard', function () {
 
     Route::get('dashboard/users', [UserController::class, 'index'])->name('users');
 
-    Route::get('dashboard/business', [BusinessController::class, 'index'])->name('business');
-    Route::post('dashboard/business', [BusinessController::class, 'add'])->name('business.add');
+    Route::get('dashboard/businesses', [BusinessController::class, 'index'])->name('business');
+    Route::post('dashboard/businesses', [BusinessController::class, 'add'])->name('business.add');
+    Route::put('dashboard/businesses/update/{id}',[BusinessController::class, 'update']);
 
 
 
