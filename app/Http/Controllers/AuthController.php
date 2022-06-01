@@ -32,7 +32,20 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $this->guard()->login($user);
+
+
+
         return redirect('dashboard');
+    }
+
+    protected function registered(Request $request, $user)
+    {
+
+        $users = new User();
+        $user->$users->generateToken();
+
+        return response()->json(['data'=>$user->toArray()], 201);
     }
 
     public function update(Request $request, $id)
