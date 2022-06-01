@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Models\Products;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Business;
 use App\Http\Controllers\BusinessController;
 
 /*
@@ -37,7 +38,9 @@ Route::get('dashboard', function () {
         $items = Category::all(['id','category']);
         $products = Products::all();
         $count = Products::count();
-    return view('home.admin',compact('items','products', 'count'));
+        $users = User::count();
+        $business = Business::count();
+    return view('home.admin',compact('items','products', 'count','users','business'));
 });
 
     //Route::group(['middleware'=> ['guest'] ])
@@ -70,8 +73,9 @@ Route::get('dashboard', function () {
 
     Route::get('dashboard/users', [UserController::class, 'index'])->name('users');
 
-    Route::get('dashboard/business', [BusinessController::class, 'index'])->name('business');
-    Route::post('dashboard/business', [BusinessController::class, 'add'])->name('business.add');
+    Route::get('dashboard/businesses', [BusinessController::class, 'index'])->name('business');
+    Route::post('dashboard/businesses', [BusinessController::class, 'add'])->name('business.add');
+    Route::put('dashboard/businesses/update/{id}',[BusinessController::class, 'update']);
 
 
 
