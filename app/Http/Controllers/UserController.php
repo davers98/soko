@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProgramResource;
+use function Doctrine\Common\Cache\Psr6\get;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+
 class UserController extends Controller
 {
-    //
+    /**
+     * @return \Illuminate\Http\Response
+     */
 
     public function index(){
-        $users = User::all();
+        $users = User::latest()->get();
+        response()->json([ProgramResource::collection($users), 'Users Fetched']);
         return view('home.users', compact('users'));
     }
 
