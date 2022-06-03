@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\BaseController as BaseController;
 
-class AuthController extends Controller
+
+class AuthController extends BaseController
 {
     //
     public function register()
@@ -23,7 +25,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required',
+            'password_confirmation' => 'required|same:password',
         ]);
 
         User::create([
@@ -32,24 +34,25 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $this->guard()->login($user);
 
+
+        if($request->acceptsJson()) {
+
+            return response();
+        }
 
 
         return redirect('dashboard');
     }
 
-    protected function registered(Request $request, $user)
-    {
 
-        $users = new User();
-        $user->$users->generateToken();
-
-        return response()->json(['data'=>$user->toArray()], 201);
-    }
 
     public function update(Request $request, $id)
     {
+        if($request->acceptsJson()) {
+
+            return response();
+        }
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -76,6 +79,19 @@ class AuthController extends Controller
 
     public function storeLogin(Request $request)
     {
+
+//        if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password]))
+//        {
+//            $authUser = Auth::user();
+//            $success['token'] = $authUser->createToken('Soko')->plainTextToken;
+//            $success['token'] = $authUser->name;
+//
+//            return response(route('dashboard'), 200)
+//                ->header($success, 'User Signed in');
+//        } else{
+//            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+//        }
+
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
@@ -84,10 +100,26 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard');
+            $authUser = Auth::user();
+            $success['token'] = $authUser->createToken('Soko')->plainTextToken;
+            $success['token'] = $authUser->name;
+
+//            if($request->acceptsJson()) {
+//                return response()->json(['data'=>$success, 201]);
+//            } else
+//            {
+                return redirect('dashboard');
+//            }
+
+
+
+        } else
+        {
+            return redirect('login')->with('error', 'Oppes! You have entered invalid credentials');
         }
 
-        return redirect('login')->with('error', 'Oppes! You have entered invalid credentials');
+
+
     }
 
     public function logout() {
