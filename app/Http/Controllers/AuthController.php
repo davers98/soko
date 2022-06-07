@@ -106,16 +106,16 @@ class AuthController extends BaseController
             $success['token'] = $authUser->name;
             $route = view('home.admin');
 
-            if($request->acceptsJson()) {
-//                return redirect('dashboard')->with('User Logged in', json_encode(['success'=>'logged in']));
-                return response()->json([
-                    'data'=>$success,
-                    201
-                ]);
-            } elseif (!$request->acceptsJson())
-            {
+//            if($request->acceptsJson()) {
+////                return redirect('dashboard')->with('User Logged in', json_encode(['success'=>'logged in']));
+//                return response()->json([
+//                    'data'=>$success,
+//                    201
+//                ]);
+//            } elseif (!$request->acceptsJson())
+//            {
                 return redirect('dashboard');
-            }
+//            }
 
 
 
