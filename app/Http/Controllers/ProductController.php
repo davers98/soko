@@ -51,10 +51,12 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         foreach(array($request->file('image')) as $imageFile){
             $fileName = date('YmHi').$imageFile->getClientOriginalName();
-            $imageFile->move(public_path('images'), $fileName);
+            $imageFile->move(public_path('public/images'), $fileName);
             $product['image'] = $fileName;
         }
         $product->save();
+
+
         return redirect('dashboard/products');
     }
 
