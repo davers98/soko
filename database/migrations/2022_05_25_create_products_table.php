@@ -16,6 +16,12 @@ return new class extends Migration
             $table->string('productname');
             $table->text('description');
             $table->string('category');
+            $table->string('shop')
+                  ->index()
+                  ->nullable();
+            $table->foreign('shop')
+                ->references('name')
+                ->on('business');
             $table->integer('price');
             $table->integer('units');
             $table->binary('image');

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\BaseController as BaseController;
+use function Spatie\Ignition\ErrorPage\jsonEncode;
 
 
 class AuthController extends BaseController
@@ -103,13 +104,18 @@ class AuthController extends BaseController
             $authUser = Auth::user();
             $success['token'] = $authUser->createToken('Soko')->plainTextToken;
             $success['token'] = $authUser->name;
+            $route = view('home.admin');
 
-//            if($request->acceptsJson()) {
-//                return response()->json(['data'=>$success, 201]);
-//            } else
-//            {
+            if($request->acceptsJson()) {
+//                return redirect('dashboard')->with('User Logged in', json_encode(['success'=>'logged in']));
+                return response()->json([
+                    'data'=>$success,
+                    201
+                ]);
+            } elseif (!$request->acceptsJson())
+            {
                 return redirect('dashboard');
-//            }
+            }
 
 
 
