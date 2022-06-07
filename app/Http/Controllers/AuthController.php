@@ -32,7 +32,27 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect('login');
+        return redirect('dashboard');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->update();
+
+
+        return redirect('dashboard/users');
     }
 
     public function login()
@@ -51,7 +71,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('home');
+            return redirect()->intended('dashboard');
         }
 
         return redirect('login')->with('error', 'Oppes! You have entered invalid credentials');
