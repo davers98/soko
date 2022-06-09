@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('category');
             $table->integer('price');
             $table->integer('units');
-            $table->binary('image');
+            $table->binary('image')->nullable();
             $table->timestamps();
         });
     }
