@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductCategories;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Products;
-use App\Models\Category;
+use App\Models\Business;
 use App\Models\User;
 use App\Http\Controllers\BusinessController;
 
@@ -34,10 +34,11 @@ Route::get('home', function(){
 
 Route::get('dashboard', function () {
         $url[] = 'dashboard/products/edit/{id}';
-        $items = Category::all(['id','category']);
-        $products = Products::all();
+        $business = Business::count();
+        $products = Products::count();
         $count = Products::count();
-    return view('home.admin',compact('items','products', 'count'));
+        $users = User::count();
+    return view('home.admin',compact('products', 'count', 'users','business'));
 });
 
     //Route::group(['middleware'=> ['guest'] ])

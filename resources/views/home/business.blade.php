@@ -30,8 +30,8 @@
                         @csrf
                         <div class="row">
                             <div class="col">
-                                <label for="productname">Business Name</label>
-                                <input type="text" class="form-control" id="productname" name="productname" placeholder="Product Name">
+                                <label for="name">Business Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Business Name">
 
                             </div>
 
@@ -49,8 +49,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="col">
-                                    <label for="businesstype">Business Type</label>
-                                    <input type="text" class="form-control" id="businesstype" name="businesstype" placeholder="Business Type">
+                                    <label for="type">Business Type</label>
+                                    <input type="text" class="form-control" id="type" name="type" placeholder="Business Type">
                                 </div>
                             </div>
                             <div class="col-4">
@@ -94,8 +94,8 @@
 
                 </th>
                 <th scope="col">
-                    <button type="button" class="btn btn-primary" href="{{ route('product') }}" data-toggle="modal" data-target="#productmodal">
-                        Add Products
+                    <button type="button" class="btn btn-primary" href="{{ route('business') }}" data-toggle="modal" data-target="#productmodal">
+                        Add Business
                     </button>
                 </th>
 
@@ -103,10 +103,9 @@
 
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Desciption</th>
-                <th scope="col">Category</th>
-                <th scope="col">Price</th>
+                <th scope="col">Business Name</th>
+                <th scope="col">Business Type</th>
+                <th scope="col">Location</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
