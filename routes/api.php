@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\BusinessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,10 @@ Route::get('products', [ProductController::class, 'product']);
 Route::post('products', [ProductController::class, 'store']);
 
 Route::get('products/{id}', [ProductController::class, 'show']);
+
+Route::get('business', [BusinessController::class, 'business']);
+
+Route::post('business', [BusinessController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

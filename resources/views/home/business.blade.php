@@ -39,8 +39,8 @@
 
                         <div class="row">
                             <div class="col">
-                                <label for="email">User Email</label>
-                                <input type="text" class="form-control" name="email" placeholder="User Email"/>
+                                <label for="user">User Email</label>
+                                <input type="text" class="form-control" id="user" name="user" placeholder="User Email"/>
 
                             </div>
 
@@ -63,7 +63,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="overview">Business Overview</label>
-                                <textarea type="file" class="form-control" id="overview" name="overview" placeholder="Business Overview" multiple/>
+                                <input type="text" class="form-control" id="overview" name="overview" placeholder="Business Overview" multiple/>
                             </div>
                         </div>
 
@@ -85,15 +85,12 @@
 
 
     <div class="container">
-        <table class="table table-bordered table-responsive-md" class="table1">
+        <table class="table table-bordered table-responsive-md table1" >
             <thead>
             <tr>
                 <th colspan="2">Search</th>
                 <th colspan="2">Edit</th>
-                <th scope="col">
-
-                </th>
-                <th scope="col">
+                <th colspan="2">
                     <button type="button" class="btn btn-primary" href="{{ route('business') }}" data-toggle="modal" data-target="#productmodal">
                         Add Business
                     </button>
@@ -106,26 +103,28 @@
                 <th scope="col">Business Name</th>
                 <th scope="col">Business Type</th>
                 <th scope="col">Location</th>
-                <th scope="col">Actions</th>
+                <th colspan="2">Actions</th>
             </tr>
             </thead>
 
             <tbody>
-            @foreach($products as $product)
+            @foreach($businesses as $business)
                 <tr>
-                    <td scope="row">{{ $product->id }}</td>
-                    <td><a href="{{ url('dashboard/products/edit/'.$product->id) }}">{{ $product->productname }}</a></td>
-                    <td>{{ $product->description }}</td>
-                    <td>{{ $product->category }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td >
-                        <button class="btn btn-primary"  data-toggle="modal" data-target="#editModal-{{ $product->id }}" > Edit </button>
+                    <td scope="row">{{ $business->id }}</td>
+                    <td><a href="{{ url('dashboard/businesses/edit/'.$business->id) }}">
+                            {{ $business->name }}<br>
+                            {{ $business->user }}</a></td>
+                    <td>{{ $business->businesstype }}</td>
 
-                        <div class="modal" id="editModal-{{ $product->id }}" tabindex="-1" role="dialog">
+                    <td>{{ $business->location }}</td>
+                    <td >
+                        <button class="btn btn-primary"  data-toggle="modal" data-target="#editModal-{{ $business->id }}" > Edit </button>
+
+                        <div class="modal" id="editModal-{{ $business->id }}" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Edit product</h5>
+                                        <h5 class="modal-title">Edit Business</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -134,33 +133,29 @@
 
 
 
-                                        <form method="post" action="{{ url('dashboard/products/update'.$product->id) }}" enctype="multipart/form-data">
+                                        <form method="post" action="{{ url('dashboard/businesses/update'.$business->id) }}" enctype="multipart/form-data">
 
                                             @csrf
                                             @method('PUT')
                                             <div class="row">
                                                 <div class="col">
-                                                    <label for="productname">Product Name</label>
-                                                    <input type="text" class="form-control" id="productname" value="{{ $product->productname }}" name="productname" placeholder="Product Name">
+                                                    <label for="name">Business Name</label>
+                                                    <input type="text" class="form-control" id="name" value="{{ $business->name }}" name="name" placeholder="Business Name">
 
                                                 </div>
                                                 <div class="col">
-                                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Category</label>
-                                                    <select class="custom-select mr-sm-2" id="category" name="category">
-                                                        <option selected  value="{{ $product->category }}"></option>
-                                                        @foreach($items as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->category }}</option>
-                                                        @endforeach
-
-                                                    </select>
+                                                    <div class="col">
+                                                        <label for="user">User</label>
+                                                        <input type="text" class="form-control" id="user" value="{{ $business->user }}" name="user" placeholder="Business">
+                                                    </div>
 
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col">
-                                                    <label for="description">Description</label>
-                                                    <textarea type="text" class="form-control" name="description" id="description"  value="{{ $product->description }}" placeholder="Description"></textarea>
+                                                    <label for="type">Type</label>
+                                                    <input type="text" class="form-control" id="type" name="type" id="description"  value="{{ $business->businesstype }}" placeholder="Business Type"/>
 
                                                 </div>
 
@@ -169,21 +164,18 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="col">
-                                                        <label for="price">Price</label>
-                                                        <input type="number" class="form-control" id="price" value="{{ $product->price }}" name="price" placeholder="Price">
+                                                        <label for="location">Location</label>
+                                                        <input type="text" class="form-control" id="location" value="{{ $business->location }}" name="location" placeholder="Location">
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
-                                                    <label for="units">Units</label>
-                                                    <input type="number" class="form-control" id="units" value="{{ $product->units }}" name="units" placeholder="Units">
-                                                </div>
+
 
 
                                             </div>
                                             <div class="row">
                                                 <div class="col">
-                                                    <label for="image">Images</label>
-                                                    <input type="file" class="form-control" id="image" name="image" placeholder="Image" multiple>
+                                                    <label for="overview">BusinessOverview</label>
+                                                    <input type="text" class="form-control" id="overview" name="overview" value="{{ $business->overview }}" placeholder="Business Overview" multiple>
                                                 </div>
                                             </div>
 
@@ -205,7 +197,7 @@
 
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger" href="{{ url('dashboard/products/delete/'. $product->id ) }}"> Delete </button>
+                        <button type="submit" class="btn btn-danger" href="{{ url('dashboard/products/delete/'. $business->id ) }}"> Delete </button>
 
                     </td>
                 </tr>
@@ -226,14 +218,13 @@
             align-items: center;
             justify-content: center;
         }
-        .table1{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 400px;
-            padding: inherit;
+        /*.table1{*/
+        /*    display: flex;*/
+        /*    align-items: center;*/
+        /*    justify-content: center;*/
+        /*    padding: inherit;*/
 
-        }
+        /*}*/
     </style>
 
 

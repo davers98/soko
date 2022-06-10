@@ -43,7 +43,7 @@
     </div>
 
     <div class="card" style="width: 10rem;">
-        <a href="{{ url('dashboard/business') }}">
+        <a href="{{ url('dashboard/businesses') }}">
             <div class="card-body">
                 <h3 class="card-title" style="align-items: center">Businesses</h3><br>
                 <h1>{{ $business }}</h1>

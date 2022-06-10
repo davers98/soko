@@ -148,7 +148,7 @@
                                                             <select class="custom-select mr-sm-2" id="category" name="category">
                                                                 <option selected  value="{{ $product->category }}"></option>
                                                                 @foreach($items as $item)
-                                                                    <option value="{{ $item->id }}">{{ $item->category }}</option>
+                                                                    <option value="{{ $item->category }}">{{ $item->category }}</option>
                                                                 @endforeach
 
                                                             </select>
