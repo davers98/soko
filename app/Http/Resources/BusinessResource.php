@@ -14,6 +14,15 @@ class BusinessResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'=>$this->id,
+            'name'=>$this->name,
+            'type'=>$this->businesstype,
+            'location'=>$this->location,
+            'user'=>$this->user,
+            'overview'=>$this->overview,
+            'created_at'=>$this->created_at,
+            'updated_at'=>$this->updated_at,
+        ];
     }
 }
