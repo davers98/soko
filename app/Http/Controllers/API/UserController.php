@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use function Symfony\Component\Mime\Header\all;
+use Validator;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -31,11 +34,11 @@ class UserController extends Controller
         $users = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => bcrypt($request->password),
         ]);
 
 
 
-        return response()->json(['Product added Successfull.', new UserResource($product)]);
+        return response()->json(['User added Successfull.', new UserResource($users)]);
     }
 }
