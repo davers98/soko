@@ -33,6 +33,8 @@ Route::post('business', [BusinessController::class, 'store']);
 
 Route::get('users', [UserController::class, 'index']);
 
+Route::post('users', [UserController::class, 'store']);
+
 //Route::get('')
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
